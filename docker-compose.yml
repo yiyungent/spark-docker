@@ -1,0 +1,47 @@
+version: '3.4'
+
+
+services:
+  spark.service01:
+    build:
+      context: .
+      dockerfile: Spark.Dockerfile
+    # 当同时设置 build, image 时，image 名将作为最后的镜像名
+    image: yiyungent/spark
+    container_name: spark01-container
+    ports:
+      - "5004:80"
+    environment:
+      - TZ=Asia/Shanghai
+    networks:
+      - spark-net
+
+  spark.service02:
+    build:
+      context: .
+      dockerfile: Spark.Dockerfile
+    image: yiyungent/spark
+    container_name: spark02-container
+    ports:
+      - "5002:80"
+    environment:
+      - TZ=Asia/Shanghai
+    networks:
+      - spark-net
+
+  spark.service03:
+    build:
+      context: .
+      dockerfile: Spark.Dockerfile
+    image: yiyungent/spark
+    container_name: spark03-container
+    ports:
+      - "5002:80"
+    environment:
+      - TZ=Asia/Shanghai
+    networks:
+      - spark-net
+
+networks:
+  spark-net:
+    driver: bridge
